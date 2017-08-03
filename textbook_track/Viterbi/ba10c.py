@@ -7,14 +7,14 @@
 '''
 
 #parse the dataset for sequence and transition matrix
-def parse():
+def parse(fname):
     sequence = ''
     cmap     = {} #map characters to transmission index
     smap     = {} #map states to matrix index
     emission = []
     tmatrix  = [] # data to return
 
-    with open( 'rosalind_ba10c.txt' ) as f:
+    with open( fname ) as f:
         for line in f:
             if line.startswith('-'):
                 continue
@@ -52,7 +52,7 @@ def parse():
     return sequence, cmap, smap, emission, tmatrix
 
 def Viterbi():
-    sequence, cmap, smap, emission, tmatrix = parse()
+    sequence, cmap, smap, emission, tmatrix = parse('rosalind_ba10c.txt')
 
     #create probability matrix
     viterbi = [ [0 for i in range(len(sequence))] for j in range(len(smap)) ]
@@ -87,6 +87,8 @@ def Viterbi():
     print(path)
 
 
+def main():
+  Viterbi()
 
-
-Viterbi()
+if __name__ == '__main__':
+  main()
